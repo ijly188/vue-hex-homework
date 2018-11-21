@@ -110,14 +110,31 @@
 // let family = ['小明', '杰倫', '阿姨', '老媽', '老爸'];
 // let ming = family[0];
 // let jay = family[1];
-// let auntie = family[2];
+// let auntie = family[2];    //古典做法
+// let [ming, jay, auntie, mom, father] = family;
+// console.log(ming, jay, auntie, mom, father)
+
+// let [ming, jay, auntie] = family;
+// console.log(ming, jay, auntie)    //這樣也可以但是就是只傳三個
+
+// let [ming, jay, , mom, father] = family;
+// console.log(ming, jay, mom, father)   //這樣也能傳，但是就是要給一個空的空間
+
+
 
 // #2 請交換以下兩個變數
 // let Goku = '悟空';
 // let Ginyu = '基紐';
+// [Goku, Ginyu] = [Ginyu, Goku];
+// console.log(Goku, Ginyu)
+
 
 // #3 請拆解以下字元到單一變數上
 // let str = '基紐特攻隊';
+// let [q, a, z, w, s] = str
+// console.log(q, a, z, w, s)
+
+
 
 // #4 物件解構
 // 請取出物件內的兩個值到單一變數上
@@ -125,6 +142,10 @@
 //   ming: '小明',
 //   jay: '杰倫',
 // };
+// let familyAll = { ...family }
+// console.log(familyAll);
+
+
 
 // #5
 // 取出其中一個值，並附在新的變數名稱上
@@ -134,11 +155,19 @@
 //   burter: '巴特',
 //   // ...
 // }
+// let { Ginyu, Jeice, burter } = GinyuTeam;
+// console.log(Ginyu, Jeice, burter)
+// let { Ginyu } = GinyuTeam;
+// console.log(Ginyu)
+// let { Ginyu: Guko } = GinyuTeam;
+// console.log(Ginyu);//  Ginyu is not defined, Ginyu已經被賦值給別人囉
+// let { Ginyu: Guko } = GinyuTeam;
+// console.log(Guko);
 
 
 // #6 延伸問題
 // let { ming: Goku, family: [, mom] } = { ming: '小明', family: ['阿姨', '老媽', '老爸'] }
-// console.log(Goku, mom); // 請問答案是什麼？
+// console.log(Goku, mom); // 請問答案是什麼？  //  小明 老媽
 
 
 // #7 預設值
@@ -146,9 +175,11 @@
 // 第一個會被賦值，第二個會用預設
 // ming: "阿明"
 // jay: "杰倫"
+// console.log(ming, jay)//阿明 杰倫
 
 // let { family: ming = '小明' } = {}
 // ming: '小明'
+// console.log(ming)//小明
 </script> 
         </div>
       </div>

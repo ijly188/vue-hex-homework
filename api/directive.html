@@ -102,49 +102,94 @@
 
 <script>
 // 官方文件 https://cn.vuejs.org/v2/guide/custom-directive.html
+// 注册一个全局自定义指令 `v-focus`
 Vue.directive('focus', {
-  inserted: function(el) {
+  // 当被绑定的元素插入到 DOM 中时……
+  inserted: function (el) {
+    // 聚焦元素
     el.focus()
   }
 })
 
 Vue.directive('validator', {
-  update: function(el, binding, vnode) {
-    console.log('update', el.value, el.className, vnode);
+  update: function(el, binding, vnode){
+    // console.log('update', el, binding, vnode);
 
-    // 尋找當前的 model 名稱
-    var currentModel = vnode.data.directives.find(function(o) {
-        return o.name === 'model';
-    }).expression;
+    //value
+    let value = el.value;
+    // console.log(value);
     
-    // 從當前 Model 取值
-    var value = vnode.context[currentModel];
-
-    // Email validate
-    var re = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-    if (!re.test(value)) {
-      el.className = 'form-control is-invalid'
-    } else {
-      el.className = 'form-control is-valid'
+    // email regular
+    let re = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+    console.log(value, re.test(value));
+    if(!re.test(value)){
+      el.className = 'form-control is-invalid';
+    }else{
+      el.className = 'form-control is-valid';
     }
   },
-  bind: function(el, binding, vnode) {
+  bind: function(el, binding, vnode){
     console.log('bind', el, binding, vnode);
-    el.className = binding.value.className
+    // el = document.querySelector('input')
+    el.className = binding.value.className;
 
-    var currentModel = vnode.data.directives.find(function(o) {
-        return o.name === 'model';
+    // v-model
+    // v-model value
+
+    let vModel = vnode.data.directives.find(function(item){
+      return item.name === 'model';
     }).expression;
-    var value = vnode.context[currentModel];
+    let value = vnode.context[vModel];
+    console.log(vModel, value);
 
-    var re = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-    if (!re.test(value)) {
-      el.className = 'form-control is-invalid'
-    } else {
-      el.className = 'form-control is-valid'
+    // email regular
+    let re = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+    console.log(value, re.test(value));
+    if(!re.test(value)){
+      el.className = 'form-control is-invalid';
+    }else{
+      el.className = 'form-control is-valid';
     }
-  }
-});
+  },
+})
+
+// Vue.directive('validator', {
+//   update: function(el, binding, vnode) {
+//     console.log('update', el.value, el.className, vnode);
+
+//     // 尋找當前的 model 名稱
+//     var currentModel = vnode.data.directives.find(function(o) {
+//         return o.name === 'model';
+//     }).expression;
+    
+//     // 從當前 Model 取值
+//     var value = vnode.context[currentModel];
+
+//     // Email validate
+//     var re = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+//     if (!re.test(value)) {
+//       el.className = 'form-control is-invalid'
+//     } else {
+//       el.className = 'form-control is-valid'
+//     }
+//   },
+//   bind: function(el, binding, vnode) {
+//     console.log('bind', el, binding, vnode);
+//     el.className = binding.value.className
+
+//     var currentModel = vnode.data.directives.find(function(o) {
+//         return o.name === 'model';
+//     }).expression;
+//     var value = vnode.context[currentModel];
+
+//     var re = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+//     if (!re.test(value)) {
+//       el.className = 'form-control is-invalid'
+//     } else {
+//       el.className = 'form-control is-valid'
+//     }
+//   }
+// });
 
 var app = new Vue({
   el: '#app',

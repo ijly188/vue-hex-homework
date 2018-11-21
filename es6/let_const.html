@@ -106,26 +106,52 @@
 <script>
 // #1
 // 修改 var -> let
-var mom = '老媽';
-(function () {
-  console.log(mom);
-})();
+// console.log(mom);  // 用let宣告變數的話，會出現is not defined
+// note:  undefined ==== 記憶體準備位置
+//        is not defined ==== 記憶體沒有準備空間
+//        所以let之前是無法取用變數的，因為連記憶體都還沒產生空間給他
+// let mom = '老媽';
+// (function () {
+//   console.log(mom);
+// })();
 
 // #2
 // 修改 var -> let
+// var 作用域是 function scope
+// let 作用域是 block
 // function varMing () {
-//   var ming = '小明';
+//   // var ming = '小明';
+//   let ming = '小明';
 //   if (true) {
-//     var ming = '杰哥';  
+//     // var ming = '杰哥';  
+//     let ming = '杰哥';  
 //     // 這裡的 ming 依然是外層的小明，所以小明即將被取代
 //   }
 //   console.log(ming);  // '杰哥'
 // }
-
+// varMing ()
 
 // #3
 // 修改 var -> let
+// 以下這段code可以等同再往下那段code
 // for (var i = 0; i < 10; i++) {
+//   console.log(i);
+//   setTimeout(function () {
+//     console.log('這執行第' + i + '次');
+//   }, 10);
+// }
+// for (var i = 0; i < 10; i++) {
+//   console.log(i);
+// }
+// setTimeout(function () {
+//   console.log('這執行第' + i + '次');
+// }, 10);
+// 結果都會是0.1.2.3.4.5.6.7.8.9    10*這執行第10次
+// 然後i會是全域變數可以用window.i去找到
+// 可是我們想要的結果是
+// 這是第i次的結果
+// 所以用let避免hoisting的狀況發生即可
+// for (let i = 0; i < 10; i++) {
 //   console.log(i);
 //   setTimeout(function () {
 //     console.log('這執行第' + i + '次');
@@ -135,6 +161,7 @@ var mom = '老媽';
 // #4
 // const
 // const ming = '鐵錚錚男子漢';
+// ming = '臭肥宅'    //Uncaught TypeError: Assignment to constant variable.因為常數不可修改
 
 // #5
 // const 與 物件
@@ -144,6 +171,8 @@ var mom = '老媽';
 //   sister: '小橙'
 // };
 // family.father = '爸爸';
+// console.log(family)
+// 可以work的原因是因為，物件傳遞是傳reference，不是傳物件本身，就不會報錯
 
 // #6
 // 額外問題，不使用 let，上述答案如何解答
@@ -153,6 +182,14 @@ var mom = '老媽';
 //     console.log('這執行第' + i + '次');
 //   }, 10);
 // }
+for (var i = 0; i < 10; i++) {
+  console.log(i);
+  (function(i){
+    setTimeout(function () {
+      console.log('這執行第' + i + '次');
+    }, 10)
+  })(i)
+}
 </script> 
         </div>
       </div>

@@ -106,13 +106,18 @@
 <script>
 // #1 物件縮寫
 // 請將以下兩個合併至一個物件上
-const Frieza = '弗利沙'
-const GinyuTeam = {
-  Ginyu: '基紐',
-  Jeice: '吉斯',
-  burter: '巴特',
-  // ...
-}
+// const Frieza = '弗利沙'
+// const GinyuTeam = {
+//   Ginyu: '基紐',
+//   Jeice: '吉斯',
+//   burter: '巴特',
+//   // ...
+// }
+// const newTeam = {
+//   GinyuTeam,
+//   Frieza
+// };
+// console.log(newTeam);
 
 
 // #2 案例
@@ -135,9 +140,16 @@ const GinyuTeam = {
 // const newTeam = {
 //   // ...
 //   showPosture: function () {
-//     console.log('我們是 基紐特戰隊')
+//     console.log('我們是 基紐特戰隊');
 //   }
 // }
+// const newTeam = {
+//   // ...
+//   showPosture(){
+//     console.log('我們是 基紐特戰隊');
+//   }
+// }
+// newTeam.showPosture();
 
 // # 搭配解構使用
 // 將以下物件指向賦予到另一個物件上，並且避免參考
@@ -153,6 +165,12 @@ const GinyuTeam = {
 //   },
 //   // ...
 // }
+// const newTeam = GinyuTeam;//這樣會兩邊都更新
+// const newTeam = {
+//   ...GinyuTeam
+// }
+// newTeam.ming = '小明';
+// console.log(newTeam, GinyuTeam);
 
 </script> 
         </div>

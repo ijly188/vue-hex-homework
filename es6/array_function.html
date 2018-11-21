@@ -124,28 +124,92 @@ const people = [
     money: Infinity
   }
 ];
+// 基本的寫法
+// for(let i = 0; i < people.length; i++){
+//   console.log(people[i]);
+// }
 
 // forEach 與 map
 // 將所有物件增加 icash 有多少金額的欄位
+// people.forEach(function(item, index, array){
+//   // console.log(item, index, array);
+//   item.icash = item.money + 500;
+//   console.log(item)
+// })
+// const newPeople = people.map(function(item, index, array){
+//   // console.log(item, index, array);
+//   return {
+//     ...item,
+//     icash: item.money + 500,
+//   }
+// })
+// console.log(newPeople);
 
 
 // filter
 // 挑出金額少於 5000 的物件
+// const filterPeople = people.filter(function(item, index){
+//   // return true  //會回傳一個array有上面四個obj
+//   // return false  //會回傳一個空的[]
+//   if( item.money < 5000){
+//     return true
+//   }
+// })
+// console.log(filterPeople);
 
 // find
 // 1. 找到金額 = 500 的物件
 // 2. 找到 > 5000 的物件
+// const findPeople = people.find(function(item, index){
+//   // return true  //會回傳一個obj有上面四個東西
+//   // return false  //會回傳一個空的[]
+//   if( item.money < 5000){
+//     return true
+//   }
+// })
+// console.log(findPeople);
+// 只回傳一次，而且只會回傳本身的值
 
-// every
+// every(全為true == true)
 // 1. 所有物件是否都超過 10000 元
 // 2. 是否所有物件超過 300 元
+// const ans = people.every(function(item, i){
+//   return item.money > 10000;
+// })
+// console.log(ans);
 
-// some
+// some(部分為true == true)
 // 1. 是否有物件超過 10000 元
 // 2. 是否有物件持有金額少於 300元
+// const ans = people.some(function(item, i){
+//   return item.money > 10000;
+// })
+// console.log(ans);
 
 // reduce
 // 去除掉老媽，請問剩下的人有多少錢？
+// 去掉老媽的的錢
+// people.splice(3, 1);
+// console.log(people);
+
+//reduce 特殊用法
+// const newNumber = people.reduce(function(prev, item, index){
+//   console.log(prev);
+//   return prev + 500;
+// }, 100);
+// console會跳100 600 1100 1600
+
+// reduce 做加總
+// const newNumber = people.reduce(function(prev, item, index){
+//   console.log(prev);
+//   return prev + item.money;
+// }, 0);
+// 比大小
+// const newNumber = people.reduce(function(prev, item, index){
+//   console.log(prev);
+//   return Math.max(prev, item.money);
+// }, 0);
+// console.log('newNumber:',newNumber);
 
 </script> 
         </div>

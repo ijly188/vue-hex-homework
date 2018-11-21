@@ -106,16 +106,31 @@
 <script>
 // #1 改寫傳統函式
 // 將以下改寫成 Arrow Function，並嘗試縮寫形式
-var callSomeone = function (someone) {
-  return someone + '吃飯了'
-}
-console.log(callSomeone('小明'))
+// var callSomeone = function (someone) {
+//   return someone + '吃飯了'
+// }
+// 變身
+// var callSomeone =  (someone) => {
+//   return someone + '吃飯了'
+// }  //最常使用的的形式
+// 變身
+// var callSomeone =  (someone) => someone + '吃飯了'
+// 變身
+// var callSomeone =  someone => someone + '吃飯了'
+// console.log(callSomeone('小明'))
+// 變身
+// var callSomeone =  () => '小明' + '吃飯了'
+// console.log(callSomeone())
 
 // # 沒有 arguments 參數
 // 將以下改寫成 Arrow Function，並觀察差異
 // const updateEasyCard = function () {
 //   let cash = 0;
 //   console.log(arguments); // arguments is not defined
+// }
+// const updateEasyCard = (...arg) => {
+//   let cash = 0;
+//   console.log(arg); // arguments is not defined
 // }
 // updateEasyCard(10, 50, 100, 50, 5, 1, 1, 1, 500);
 
@@ -125,26 +140,43 @@ console.log(callSomeone('小明'))
 // var auntie = {
 //   name: '漂亮阿姨',
 //   callName: function () { 
-//     console.log('1', this.name); // 1 漂亮阿姨
+//     console.log('1', this.name ,this); // 1 漂亮阿姨
 //     setTimeout(function () {
 //       console.log('2', this.name); // 2 漂亮阿姨
 //       console.log('3', this); // 3 auntie 這個物件
 //     }, 10);
 //   },
+//   callName2: () => { 
+//     console.log('1 arrow', this.name ,this); // 1 漂亮阿姨
+//     setTimeout(() => {
+//       console.log('2 arrow', this.name); // 2 漂亮阿姨
+//       console.log('3 arrow', this); // 3 auntie 這個物件
+//     }, 10);
+//   },
 // }
 // auntie.callName();
+// auntie.callName2();
+// 結果會變成1 漂亮阿姨 2 全域阿婆 3 auntie這個物件
+// 會這樣的原因是因為this的指向問題
+// 傳統this = 函式的呼叫方式 *************超級重要
+// 因為是去呼叫auntie.callName()所以callName的函式的this指的是auntie
+// 而setTimeout這個函式是在window下，所以會去call window.name
+// 在146行那邊看this就可以看到是call window
+// 
 
 // # 善用的方式
 // 請將內層的 console.log 能夠指向 auntie 這個物件
-// var auntie = {
-//   name: '漂亮阿姨',
-//   callName () { 
-//     setTimeout(function () {
-//       console.log(this);
-//     }, 10);
-//   }
-// }
-// auntie.callName();
+var auntie = {
+  name: '漂亮阿姨',
+  callName () { 
+    let vm = this;
+    setTimeout(function () {
+      // console.log(this);
+      console.log(vm, vm.name);
+    }, 10);
+  }
+}
+auntie.callName();
 </script> 
         </div>
       </div>

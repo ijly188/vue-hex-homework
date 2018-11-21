@@ -127,9 +127,15 @@ var child = {
   },
   methods: {
     addData: function() {
-      this.data.item = {
+      // this.data.item = {
+      //   name: this.item.name
+      // }
+      // console.log(this.data, this);
+      
+      //這邊的參考連結：https://vuejs.org/v2/api/#vm-set
+      this.$set(this.data, 'item',{
         name: this.item.name
-      }
+      });
       console.log(this.data, this);
 
       // this.$set(this.data, 'item', {
